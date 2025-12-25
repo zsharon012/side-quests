@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import happyPerson from '../src/assets/happy-person.png';
 
@@ -8,7 +8,7 @@ function NavBar() {
       <ul>
         <div className="logo-title">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-map" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.5.5 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103M10 1.91l-4-.8v12.98l4 .8zm1 12.98 4-.8V1.11l-4 .8zm-6-.8V1.11l-4 .8v12.98z"/>
+            <path fillRule="evenodd" d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.5.5 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103M10 1.91l-4-.8v12.98l4 .8zm1 12.98 4-.8V1.11l-4 .8zm-6-.8V1.11l-4 .8v12.98z"/>
           </svg>
           <li className="selected">SideQuests</li>
         </div>
@@ -31,6 +31,13 @@ function NavBar() {
 }
 
 function PersonalProfile() {
+
+  const [editCount, setEditCount] = useState(0);
+
+  useEffect(() => {
+    console.log('user clicked edit: %d times', editCount);
+  }, [editCount])
+
   return (
     <div className="profile">
       <img src={happyPerson} alt="sample profile pic" />
@@ -57,13 +64,13 @@ function PersonalProfile() {
       </div>
       <div className="profile-bio">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-telephone-fill" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+          <path fillRule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
         </svg>
         <h4>Phone Number: 1234567890</h4>
       </div>
 
       <div className="buttons">
-        <button className="edit-button">Edit</button>
+        <button className="edit-button" onClick={() => {setEditCount(editCount + 1)}}>Edit</button>
         <button className="save-button">Save</button>
       </div>
     </div>
@@ -109,7 +116,7 @@ const PROFILES = [
 ]
 
 function SavedProfile({ clicked, name, contactInfo, handleClick }) {
-  const bgColor = clicked ? 'rgba(229, 229, 229, 1)' : 'rgba(255, 255, 255, 1)';
+  const bgColor = clicked ? 'rgba(229, 229, 229, 1)' : '#F9F9FF';
 
   return (
     <div style={{ backgroundColor: bgColor }} onClick={handleClick}>

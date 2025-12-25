@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './App.css';
 import happyPerson from '../src/assets/happy-person.png';
 
@@ -72,41 +73,50 @@ function PersonalProfile() {
 const PROFILES = [
   {
     name: "Shelby Berry",
-    contactInfo: "hello@gmail.com"
+    contactInfo: "hello@gmail.com",
+    clicked: false
   },
   {
     name: "Shelby Berry",
-    contactInfo: "hello@gmail.com"
+    contactInfo: "hello@gmail.com",
+    clicked: false
   },
   {
     name: "Shelby Berry",
-    contactInfo: "hello@gmail.com"
+    contactInfo: "hello@gmail.com",
+    clicked: false
   },
   {
     name: "Shelby Berry",
-    contactInfo: "hello@gmail.com"
+    contactInfo: "hello@gmail.com",
+    clicked: false
   },
   {
     name: "Shelby Berry",
-    contactInfo: "hello@gmail.com"
+    contactInfo: "hello@gmail.com",
+    clicked: false
   },
   {
     name: "Shelby Berry",
-    contactInfo: "hello@gmail.com"
+    contactInfo: "hello@gmail.com",
+    clicked: false
   },
   {
     name: "Shelby Berry",
-    contactInfo: "hello@gmail.com"
+    contactInfo: "hello@gmail.com",
+    clicked: false
   }
 ]
 
-function SavedProfile(props) {
+function SavedProfile({ clicked, name, contactInfo, handleClick }) {
+  const bgColor = clicked ? 'rgba(229, 229, 229, 1)' : 'rgba(255, 255, 255, 1)';
+
   return (
-    <>
+    <div style={{ backgroundColor: bgColor }} onClick={handleClick}>
       <hr className="my-line"/>
-      <h3>{props.name}</h3>
-      <p>Contact Info: {props.contactInfo}</p>
-    </>
+      <h3>{name}</h3>
+      <p>Contact Info: {contactInfo}</p>
+    </div>
   )
 }
 
@@ -119,6 +129,14 @@ function Footer() {
 }
 
 function App() {
+  const [profiles, setProfiles] = useState(PROFILES);
+
+  const handleClick = (idx) => {
+    const newProfiles = [...profiles];
+    newProfiles[idx].clicked = !newProfiles[idx].clicked;
+    setProfiles(newProfiles);
+  }
+
   return (
     <div className="everything">
       <NavBar />
@@ -133,12 +151,14 @@ function App() {
           </div>
           <div>
             {
-              PROFILES.map((profile, idx) => {
+              profiles.map((profile, idx) => {
                 return (
                   <SavedProfile
                     key={idx}
                     name={profile.name}
                     contactInfo={profile.contactInfo}
+                    clicked={profile.clicked}
+                    handleClick={() => {handleClick(idx)}}
                   />
                 )
               })

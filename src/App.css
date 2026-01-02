@@ -29,6 +29,11 @@ footer {
   margin-bottom: 50px;
 }
 
+.single-profiles {
+  max-height: 500px;
+  overflow: auto;
+}
+
 .everything {
   background-color: #F9F9FF;
 }

@@ -11,7 +11,7 @@ export default function PersonalProfile() {
 
   return (
     <div className="profile">
-      <img src={happyPerson} alt="sample profile pic" />
+      <img src={happyPerson} alt="sample profile pic" className='profile-pic'/>
       
       <h3>About</h3>
       <div className="profile-bio">

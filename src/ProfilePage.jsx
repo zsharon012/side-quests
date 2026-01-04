@@ -19,7 +19,7 @@ export default function MainContent() {
       setLoading(true);
       const getAllUsers = async() => {
         try {
-          const res = await fetch("https://disc-assignment-5-users-api-iyct.onrender.com/api/users");
+          const res = await fetch("http://localhost:3005/users");
           const data = await res.json();
           setProfiles(data);
         } catch (e) {
@@ -53,7 +53,7 @@ export default function MainContent() {
                     return (
                         <SavedProfile
                         key={idx}
-                        name={profile.firstName + profile.lastName}
+                        name={profile.first_name + profile.last_name}
                         contactInfo={profile.email}
                         clicked={profile.clicked}
                         handleClick={() => {handleClick(idx)}}
